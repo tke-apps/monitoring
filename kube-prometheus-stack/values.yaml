@@ -1,0 +1,56 @@
+grafana:
+  adminPassword: "111111"
+  defaultDashboardsTimeZone: "browser"
+  sidecar:
+    image:
+      registry: docker.io/kiwigrid
+      repository: k8s-sidecar
+  testFramework:
+    enabled: false
+alertmanager:
+  alertmanagerSpec:
+    image:
+      registry: docker.io
+      repository: imroc/prometheus-alertmanager
+prometheus:
+  prometheusSpec:
+    image:
+      registry: docker.io
+      repository: imroc/prometheus
+prometheusOperator:
+  image:
+    registry: docker.io
+    repository: imroc/prometheus-operator
+  admissionWebhooks:
+    deployment:
+      image:
+        registry: docker.io
+        repository: imroc/prometheus-operator-admission-webhook
+    patch:
+      image:
+        registry: docker.io
+        repository: k8smirror/ingress-nginx-kube-webhook-certgen
+  prometheusConfigReloader:
+    image:
+      registry: docker.io
+      repository: docker.io/imroc/prometheus-config-reloader
+  thanosImage:
+    registry: docker.io
+    repository: imroc/thanos
+thanosRuler:
+  thanosRulerSpec:
+    image:
+      registry: docker.io
+      repository: imroc/thanos
+kube-state-metrics:
+  image:
+    registry: docker.io
+    repository: k8smirror/kube-state-metrics
+prometheus-node-exporter:
+  image:
+    registry: docker.io
+    repository: imroc/prometheus-node-exporter
+  kubeRBACProxy:
+    image:
+      registry: quay.io
+      repository: brancz/kube-rbac-proxy
