@@ -1,5 +1,6 @@
 grafana:
-  adminPassword: "111111"
+  adminUser: "admin"
+  adminPassword: "admin"
   defaultDashboardsTimeZone: "browser"
   sidecar:
     image:
