@@ -38,6 +38,10 @@ prometheus:
         kubernetes_sd_configs:
           - role: pod # 超级节点 Pod 的监控数据暴露在 Pod 自身 IP 的 9100 端口，所以使用 Pod 服务发现
         relabel_configs:
+          - source_labels:
+              [__meta_kubernetes_pod_annotation_tke_cloud_tencent_com_pod_type]
+            regex: eklet # 如果是标准集群，超级节点的 Pod 会此注解，加上此条件只采集超级节点的 Pod
+            action: keep
           - source_labels: [__meta_kubernetes_pod_phase]
             regex: Running # 非 Running 状态的 Pod 机器资源已释放，不需要采集
             action: keep
