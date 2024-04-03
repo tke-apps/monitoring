@@ -55,3 +55,25 @@ prometheus-node-exporter:
     image:
       registry: quay.io
       repository: brancz/kube-rbac-proxy
+kubelet:
+  serviceMonitor: # 排除超级节点
+    relabelings:
+      - source_labels:
+          - __meta_kubernetes_node_label_node_kubernetes_io_instance_type
+        regex: eklet
+        action: drop
+    probesRelabelings:
+      - source_labels:
+          - __meta_kubernetes_node_label_node_kubernetes_io_instance_type
+        regex: eklet
+        action: drop
+    cAdvisorRelabelings:
+      - source_labels:
+          - __meta_kubernetes_node_label_node_kubernetes_io_instance_type
+        regex: eklet
+        action: drop
+    resourceRelabelings:
+      - source_labels:
+          - __meta_kubernetes_node_label_node_kubernetes_io_instance_type
+        regex: eklet
+        action: drop
